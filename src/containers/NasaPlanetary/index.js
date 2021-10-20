@@ -1,4 +1,4 @@
-import response from "./response.json";
+import { useEffect, useState } from "react";
 
 function NasaVideo({ title, url, explanation }) {
     return (
@@ -23,20 +23,29 @@ function NasaImage({ title, url, explanation }) {
 }
 
 export default function NasaPlanetary() {
-    /*     fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY")
-            .then(response => response.json())
-            .then(json => console.log(json)); */
-    console.log(response);
 
-    const Component = response.media_type === "video" ? NasaVideo : NasaImage;
+    const [state, setState] = useState(null);
+
+    // useEffect(() => { }, []);
+    useEffect(() => {
+        fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY")
+            .then(response => response.json())
+            .then(json => setState(json));
+    }, []);
+
+    if (state === null) {
+        return <div>Loading...</div>;
+    }
+
+    const Component = state.media_type === "video" ? NasaVideo : NasaImage;
 
     return (
         <div className="NasaPlanetary">
             <h1>NASA Planetary</h1>
             <Component
-                title={response.title}
-                explanation={response.explanation}
-                url={response.url}
+                title={state.title}
+                explanation={state.explanation}
+                url={state.url}
             />
         </div>
     );
