@@ -1,0 +1,9 @@
+.NasaImage figcaption{
+    margin: 30px auto;
+    text-align: justify;
+}
+
+.NasaImage img{
+    max-width:100%;
+    height:auto;
+}
