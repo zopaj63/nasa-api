@@ -1,5 +1,5 @@
 import NasaPlanetary from "./containers/NasaPlanetary";
-
+import "./App.css";
 
 function App() {
   return (
